@@ -1,0 +1,107 @@
+    /* CSS untuk Navbar */
+    .navbar {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+      }
+      
+      .nav-link {
+        color: #fff; /* Warna teks default */
+        text-decoration: none;
+        padding: 5px 10px;
+        display: inline-flex; /* Mengatur teks dan ikon agar sejajar */
+        align-items: center;
+        transition: background-color 0.3s ease; /* Animasi saat perubahan warna */
+      }
+  
+      /* Hover Effect */
+      .nav-link:hover {
+        background-color: #474e46; /* Warna background saat di-hover */
+        border-radius: 5px; /* Border radius untuk tampilan lebih halus */
+      }
+  
+      /* Menandai Halaman Aktif */
+      .nav-item .nav-link.active {
+        background-color: #838782; /* Warna background untuk halaman aktif */
+        color: #fff; /* Warna teks halaman aktif */
+        border-radius: 5px;
+      }
+/* Shadow dan hover effect pada form */
+.form-group .form-control {
+    transition: box-shadow 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Shadow abu-abu ringan */
+  }
+  
+  .form-group .form-control:hover, 
+  .form-group .form-control:focus {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow lebih kuat saat hover */
+    transform: translateY(-2px); /* Efek hover untuk mengangkat sedikit */
+    border-color: #666; /* Warna border saat fokus */
+  }
+  
+  /* Menambahkan shadow dan hover pada button */
+  .btn {
+    transition: box-shadow 0.3s ease, transform 0.2s ease;
+  }
+  
+  .btn:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow lebih kuat saat hover */
+    transform: translateY(-2px); /* Efek hover untuk button */
+  }
+  
+  /* Efek hover pada setiap kolom */
+.table td:hover {
+    background-color: #e8e8e8; /* Warna latar belakang saat kolom di-hover */
+    transition: background-color 0.3s ease; /* Transisi untuk efek halus */
+  }
+  
+  /* Efek hover untuk baris secara keseluruhan */
+  .table tbody tr:hover {
+    background-color: #f5f5f5; /* Warna latar belakang saat baris di-hover */
+  }
+
+  /* XS: Layar sangat kecil (mobile) */
+@media (max-width: 575.98px) {
+        display: block;
+        width: 100%;
+        margin: 5px 0;
+        margin: 5px 0;
+
+}
+
+/* SM: Layar kecil (mobile landscape) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+        display: block;
+        width: 100%;
+        margin: 10px 0;
+}
+
+/* MD: Layar sedang (tablet) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+        display: block;
+        width: 80%;
+        margin: 0 auto;
+        padding: 1rem 3rem;
+}
+
+/* LG: Layar besar (desktop) */
+@media (min-width: 992px) {
+        display: block;
+}
+
+/* Scrollbar Custom */
+body::-webkit-scrollbar {
+    width: 12px;
+}
+
+body::-webkit-scrollbar-track {
+    background: #e6e7e5;
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: #3f3c3c;
+    border-radius: 20px;
+    border: 3px solid #000000;
+}
+  

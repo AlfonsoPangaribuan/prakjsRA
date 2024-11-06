@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kalkulator Nilai Mahasiswa</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+          background-color: #f0f0f0;
+          color: #333;
+        }
+        .navbar {
+          position: fixed;
+          top: 0;
+          width: 100%;
+          z-index: 1000;
+        }
+        .main-content {
+          margin-top: 70px; /* Jarak antara header navbar dan main content */
+        }
+        .result-pass {
+          color: green;
+        }
+        .result-fail {
+          color: red;
+        }
+      </style>
+    </head>
+    <body>
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">
+          <i class="fas fa-calculator"></i> Kalkulator Nilai
+        </a>
+        <div class="collapse navbar-collapse">
+          <ul class="navbar-nav ml-auto">
+          </ul>
+        </div>
+        <div class="nav-item"style="float: right;">
+          <a class="nav-link active" href="index.html" style="color: white; margin: 0 10px; text-decoration: none;">Home</a>
+          <a class="nav-link" href="tabel.html" style="color: white; margin: 0 10px; text-decoration: none;">Tabel Nilai</a>
+          <a class="nav-link" href="kartu.html" style="color: white; margin: 0 10px; text-decoration: none;">Kartu Nilai</a>
+      </div>
+      </nav>
+
+  <div class="container mt-5 pt-5">
+    <h1 class="text-center"><strong>Kalkulator Nilai Mahasiswa</strong></h1>
+    <div class="form-group">
+      <label for="nama"><strong>Nama</strong></label>
+      <input type="text" id="nama" class="form-control" placeholder="Masukkan Nama" required>
+    </div>
+    <div class="form-group">
+      <label for="mataKuliah"><strong>Mata Kuliah</strong></label>
+      <select id="mataKuliah" class="form-control" required>
+        <option value="" disabled selected>Pilih Mata Kuliah</option>
+        <option value="Jaringan Komputer">Jaringan Komputer</option>
+        <option value="Pemrograman Web">Pemrograman Web</option>
+        <option value="Interaksi Manusia dan Komputer">Interaksi Manusia dan Komputer</option>
+        <option value="Sistem Informasi">Sistem Informasi</option>
+        <option value="Pemrograman Paralel">Pemrograman Paralel</option>
+        <option value="Kuliah Kerja Nyata">Kuliah Kerja Nyata</option>
+        <option value="Metodologi Penelitian">Metodologi Penelitian</option>
+        <option value="Kapita Selekta Informatika">Kapita Selekta Informatika</option>
+        <option value="Intelegensi Buatan">Intelegensi Buatan</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="nilaiTugas"><strong>Tugas (30%)</strong></label>
+      <input type="number" id="nilaiTugas" class="form-control" placeholder="0-100" min="0" max="100" required oninput="validateInput(this)">
+    </div>
+    <div class="form-group">
+      <label for="nilaiUTS"><strong>Nilai UTS (30%)</strong></label>
+      <input type="number" id="nilaiUTS" class="form-control" placeholder="0-100" min="0" max="100" required oninput="validateInput(this)">
+    </div>
+    <div class="form-group">
+      <label for="nilaiUAS"><strong>Nilai UAS (40%)</strong></label>
+      <input type="number" id="nilaiUAS" class="form-control" placeholder="0-100" min="0" max="100" required oninput="validateInput(this)">
+    </div>
+    <button onclick="hitungNilai()" class="btn btn-dark btn-block"><strong>Hitung Nilai</strong></button>
+    <div id="hasil" class="mt-4 text-center"></div>
+  </div>
+
+  <script src="kalkulator.js"></script>
+</body>
+<footer class="bg-dark text-white text-center py-3 mt-5">
+  <div class="container">
+    <p>&copy; 2024 Alfonso Pangaribuan - Praktikum Pemweb</p>
+    <p>Program Studi Teknik Informatika, Institut Teknologi Sumatera</p>
+    <div>
+      </a>
+      <a href="https://www.instagram.com/alfonsopangaribuan05" target="_blank" class="text-white mx-2">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="https://github.com/alfonsopangaribuan" target="_blank" class="text-white mx-2">
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+  </div>
+</footer>
+</html>

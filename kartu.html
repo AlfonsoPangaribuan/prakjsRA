@@ -1,0 +1,296 @@
+<html>
+<head>
+    <title>Kartu Hasil Studi</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+    <script>
+        function calculateIndex() {
+            const gradeValues = {
+                'A': 4,
+                'AB': 3.5,
+                'B': 3,
+                'BC': 2.5,
+                'C': 2,
+                'D': 1,
+                'E': 0,
+                'T': 0
+            };
+
+            let totalSKS = 0;
+            let totalPoints = 0;
+
+            document.querySelectorAll('.grade-select').forEach(select => {
+                const sks = parseInt(select.dataset.sks);
+                const grade = select.value;
+                totalSKS += sks;
+                totalPoints += gradeValues[grade] * sks;
+            });
+
+            const indexPrestasi = totalPoints / totalSKS;
+            document.getElementById('index-prestasi').innerText = indexPrestasi.toFixed(2);
+        }
+
+        function printPDF() {
+            const element = document.getElementById('kartu-hasil-studi');
+            html2pdf(element, {
+                margin: 1,
+                filename: 'Kartu_Hasil_Studi.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+            });
+        }
+    </script>
+</head>
+<body class="bg-gray-100">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">
+          <i class="fas fa-calculator"></i> Kalkulator Nilai
+      </a>
+        <div class="collapse navbar-collapse">
+          <ul class="navbar-nav ml-auto">
+          </ul>
+        </div>
+        <div class="nav-item"style="float: right;">
+            <a class="nav-link" href="index.html" style="color: white; margin: 0 10px; text-decoration: none;">Home</a>
+            <a class="nav-link" href="tabel.html" style="color: white; margin: 0 10px; text-decoration: none;">Tabel Nilai</a>
+            <a class="nav-link active" href="kartu.html" style="color: white; margin: 0 10px; text-decoration: none;">Kartu Nilai</a>
+        </div>
+      </nav>
+    <div class="container mx-auto p-4 mt-4">
+        <div id="kartu-hasil-studi" class="bg-white p-6 rounded shadow-md">
+            <div class="flex justify-end items-center mb-4">
+                <button class="bg-gray-200 text-gray-600 px-4 py-2 rounded" onclick="printPDF()">
+                    <i class="fas fa-print"></i> Cetak
+                </button>
+            </div>
+            <h1 class="text-center text-xl font-semibold mb-6">KARTU HASIL STUDI</h1>
+            <div class="mb-6">
+                <table class="w-full text-sm text-left text-gray-500">
+                    <tbody>
+                        <tr>
+                            <td class="py-2">Nama</td>
+                            <td class="py-2">
+                                <input type="text" id="nama" value="ALFONSO PANGARIBUAN" class="border border-gray-300 rounded px-2 py-1 w-full">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="table table-bordered mt-4">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th class="border border-gray-300 px-4 py-2">NO</th>
+                            <th class="border border-gray-300 px-4 py-2">KODE MK</th>
+                            <th class="border border-gray-300 px-4 py-2">MATAKULIAH</th>
+                            <th class="border border-gray-300 px-4 py-2">SKS</th>
+                            <th class="border border-gray-300 px-4 py-2">NILAI</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="border border-gray-300 px-4 py-2">1</td>
+                            <td class="border border-gray-300 px-4 py-2">IF3125</td>
+                            <td class="border border-gray-300 px-4 py-2">Jaringan Komputer</td>
+                            <td class="border border-gray-300 px-4 py-2">3</td>
+                            <td class="border border-gray-300 px-4 py-2">
+                                <select class="grade-select border border-gray-300 rounded px-2 py-1" data-sks="3" onchange="calculateIndex()">
+                                    <option value="T" selected>T</option>
+                                    <option value="A">A</option>
+                                    <option value="AB">AB</option>
+                                    <option value="B">B</option>
+                                    <option value="BC">BC</option>
+                                    <option value="C">C</option>
+                                    <option value="D">D</option>
+                                    <option value="E">E</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-300 px-4 py-2">2</td>
+                            <td class="border border-gray-300 px-4 py-2">IF3028</td>
+                            <td class="border border-gray-300 px-4 py-2">Pemrograman Web</td>
+                            <td class="border border-gray-300 px-4 py-2">3</td>
+                            <td class="border border-gray-300 px-4 py-2">
+                                <select class="grade-select border border-gray-300 rounded px-2 py-1" data-sks="3" onchange="calculateIndex()">
+                                    <option value="T" selected>T</option>
+                                    <option value="A">A</option>
+                                    <option value="AB">AB</option>
+                                    <option value="B">B</option>
+                                    <option value="BC">BC</option>
+                                    <option value="C">C</option>
+                                    <option value="D">D</option>
+                                    <option value="E">E</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-300 px-4 py-2">3</td>
+                            <td class="border border-gray-300 px-4 py-2">IF3034</td>
+                            <td class="border border-gray-300 px-4 py-2">Interaksi Manusia dan Komputer</td>
+                            <td class="border border-gray-300 px-4 py-2">2</td>
+                            <td class="border border-gray-300 px-4 py-2">
+                                <select class="grade-select border border-gray-300 rounded px-2 py-1" data-sks="2" onchange="calculateIndex()">
+                                    <option value="T" selected>T</option>
+                                    <option value="A">A</option>
+                                    <option value="AB">AB</option>
+                                    <option value="B">B</option>
+                                    <option value="BC">BC</option>
+                                    <option value="C">C</option>
+                                    <option value="D">D</option>
+                                    <option value="E">E</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-300 px-4 py-2">4</td>
+                            <td class="border border-gray-300 px-4 py-2">IF3133</td>
+                            <td class="border border-gray-300 px-4 py-2">Sistem Informasi</td>
+                            <td class="border border-gray-300 px-4 py-2">2</td>
+                            <td class="border border-gray-300 px-4 py-2">
+                                <select class="grade-select border border-gray-300 rounded px-2 py-1" data-sks="2" onchange="calculateIndex()">
+                                    <option value="T" selected>T</option>
+                                    <option value="A">A</option>
+                                    <option value="AB">AB</option>
+                                    <option value="B">B</option>
+                                    <option value="BC">BC</option>
+                                    <option value="C">C</option>
+                                    <option value="D">D</option>
+                                    <option value="E">E</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-300 px-4 py-2">5</td>
+                            <td class="border border-gray-300 px-4 py-2">IF4022</td>
+                            <td class="border border-gray-300 px-4 py-2">Pemrograman Paralel</td>
+                            <td class="border border-gray-300 px-4 py-2">3</td>
+                            <td class="border border-gray-300 px-4 py-2">
+                                <select class="grade-select border border-gray-300 rounded px-2 py-1" data-sks="3" onchange="calculateIndex()">
+                                    <option value="T" selected>T</option>
+                                    <option value="A">A</option>
+                                    <option value="AB">AB</option>
+                                    <option value="B">B</option>
+                                    <option value="BC">BC</option>
+                                    <option value="C">C</option>
+                                    <option value="D">D</option>
+                                    <option value="E">E</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-300 px-4 py-2">6</td>
+                            <td class="border border-gray-300 px-4 py-2">KU0005</td>
+                            <td class="border border-gray-300 px-4 py-2">Kuliah Kerja Nyata</td>
+                            <td class="border border-gray-300 px-4 py-2">3</td>
+                            <td class="border border-gray-300 px-4 py-2">
+                                <select class="grade-select border border-gray-300 rounded px-2 py-1" data-sks="3" onchange="calculateIndex()">
+                                    <option value="T" selected>T</option>
+                                    <option value="A">A</option>
+                                    <option value="AB">AB</option>
+                                    <option value="B">B</option>
+                                    <option value="BC">BC</option>
+                                    <option value="C">C</option>
+                                    <option value="D">D</option>
+                                    <option value="E">E</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-300 px-4 py-2">7</td>
+                            <td class="border border-gray-300 px-4 py-2">IF3101</td>
+                            <td class="border border-gray-300 px-4 py-2">Metodologi Penelitian</td>
+                            <td class="border border-gray-300 px-4 py-2">2</td>
+                            <td class="border border-gray-300 px-4 py-2">
+                                <select class="grade-select border border-gray-300 rounded px-2 py-1" data-sks="2" onchange="calculateIndex()">
+                                    <option value="T" selected>T</option>
+                                    <option value="A">A</option>
+                                    <option value="AB">AB</option>
+                                    <option value="B">B</option>
+                                    <option value="BC">BC</option>
+                                    <option value="C">C</option>
+                                    <option value="D">D</option>
+                                    <option value="E">E</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-300 px-4 py-2">8</td>
+                            <td class="border border-gray-300 px-4 py-2">IF3102</td>
+                            <td class="border border-gray-300 px-4 py-2">Kapita Selekta Informatika</td>
+                            <td class="border border-gray-300 px-4 py-2">3</td>
+                            <td class="border border-gray-300 px-4 py-2">
+                                <select class="grade-select border border-gray-300 rounded px-2 py-1" data-sks="3" onchange="calculateIndex()">
+                                    <option value="T" selected>T</option>
+                                    <option value="A">A</option>
+                                    <option value="AB">AB</option>
+                                    <option value="B">B</option>
+                                    <option value="BC">BC</option>
+                                    <option value="C">C</option>
+                                    <option value="D">D</option>
+                                    <option value="E">E</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-300 px-4 py-2">9</td>
+                            <td class="border border-gray-300 px-4 py-2">IF3111</td>
+                            <td class="border border-gray-300 px-4 py-2">Intelijensi Buatan</td>
+                            <td class="border border-gray-300 px-4 py-2">3</td>
+                            <td class="border border-gray-300 px-4 py-2">
+                                <select class="grade-select border border-gray-300 rounded px-2 py-1" data-sks="3" onchange="calculateIndex()">
+                                    <option value="T" selected>T</option>
+                                    <option value="A">A</option>
+                                    <option value="AB">AB</option>
+                                    <option value="B">B</option>
+                                    <option value="BC">BC</option>
+                                    <option value="C">C</option>
+                                    <option value="D">D</option>
+                                    <option value="E">E</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="mt-4">
+                <table class="w-full text-sm text-left text-gray-500">
+                    <tbody>
+                        <tr>
+                            <td class="py-2">TOTAL SKS</td>
+                            <td class="py-2">: 23</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2">INDEKS PRESTASI</td>
+                            <td class="py-2">: <span id="index-prestasi">0.00</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</body>
+<footer class="bg-dark text-white text-center py-3 mt-5">
+    <div class="container">
+      <p>&copy; 2024 Alfonso Pangaribuan - Praktikum Pemweb</p>
+      <p>Program Studi Teknik Informatika, Institut Teknologi Sumatera</p>
+      <div>
+        </a>
+        <a href="https://www.instagram.com/alfonsopangaribuan05" target="_blank" class="text-white mx-2">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://github.com/alfonsopangaribuan" target="_blank" class="text-white mx-2">
+          <i class="fab fa-github"></i>
+        </a>
+      </div>
+    </div>
+  </footer>
+</html>

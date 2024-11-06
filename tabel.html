@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tabel Hasil Nilai</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      background-color: #f0f0f0;
+      color: #333;
+    }
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+    .main-content {
+      margin-top: 70px;
+    }
+    .result-pass {
+      color: green;
+      font-weight: bold;
+    }
+    .result-fail {
+      color: red;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">
+      <i class="fas fa-calculator"></i> Kalkulator Nilai
+    </a>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav ml-auto">
+      </ul>
+    </div>
+    <div class="nav-item"style="float: right;">
+      <a class="nav-link" href="index.html" style="color: white; margin: 0 10px; text-decoration: none;">Home</a>
+      <a class="nav-link active" href="tabel.html" style="color: white; margin: 0 10px; text-decoration: none;">Tabel Nilai</a>
+      <a class="nav-link" href="kartu.html" style="color: white; margin: 0 10px; text-decoration: none;">Kartu Nilai</a>
+  </div>
+  </nav>
+
+  <div class="container mt-5 pt-5">
+    <h2 class="text-center"><strong>Hasil Nilai Mahasiswa</strong></h2>
+    <div id="dataHasil">
+      <table class="table table-bordered mt-4">
+        <thead class="thead-dark">
+          <tr>
+            <th>Nama</th>
+            <th>Mata Kuliah</th>
+            <th>Nilai Tugas (30%)</th>
+            <th>Nilai UTS (30%)</th>
+            <th>Nilai UAS (40%)</th>
+            <th>Rata-rata</th>
+            <th>Nilai Huruf</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="hasilTable">
+          <!-- Tabel hasil akan diisi oleh JavaScript -->
+        </tbody>
+      </table>
+      <p id="noDataMessage" class="text-center text-muted mt-3"></p>
+    </div>
+    <div class="text-center mt-4">
+      <button onclick="resetData()" class="btn btn-danger">Reset Data</button>
+    </div>
+  </div>
+
+
+  <script>
+        function resetData() {
+      // Hapus data hasil sebelumnya dari localStorage
+      localStorage.removeItem("hasilData");
+      alert("Data sebelumnya telah dihapus!");
+    }
+    document.addEventListener("DOMContentLoaded", function () {
+        // Ambil data yang ada di localStorage
+        let hasilData = JSON.parse(localStorage.getItem("hasilData")) || [];
+
+        let rows = "";
+        if (hasilData.length === 0) {
+            // Tampilkan pesan jika tidak ada data
+            document.getElementById("noDataMessage").innerText = "Belum ada data, silakan isi kalkulator di halaman Home!";
+        } else {
+            // Isi tabel jika ada data
+            hasilData.forEach(data => {
+                let statusClass = data.status === "Lulus" ? "result-pass" : "result-fail";
+                rows += `
+                    <tr>
+                        <td>${data.nama}</td>
+                        <td>${data.mataKuliah}</td>
+                        <td>${data.nilaiTugas}</td>
+                        <td>${data.nilaiUTS}</td>
+                        <td>${data.nilaiUAS}</td>
+                        <td>${data.rataRata}</td>
+                        <td>${data.nilaiHuruf}</td>
+                        <td class="${statusClass}">${data.status}</td>
+                    </tr>
+                `;
+            });
+        }
+        document.getElementById("hasilTable").innerHTML = rows;
+    });
+  </script>
+</body>
+<footer class="bg-dark text-white text-center py-3 mt-5">
+  <div class="container">
+    <p>&copy; 2024 Alfonso Pangaribuan - Praktikum Pemweb</p>
+    <p>Program Studi Teknik Informatika, Institut Teknologi Sumatera</p>
+    <div>
+      </a>
+      <a href="https://www.instagram.com/alfonsopangaribuan05" target="_blank" class="text-white mx-2">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="https://github.com/alfonsopangaribuan" target="_blank" class="text-white mx-2">
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+  </div>
+</footer>
+</html>
